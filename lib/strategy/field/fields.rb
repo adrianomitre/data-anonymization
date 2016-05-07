@@ -3,6 +3,8 @@ require 'strategy/field/random_boolean'
 
 require 'strategy/field/anonymous'
 
+require 'strategy/field/replicate'
+
 #array
 require 'strategy/field/anonymize_array'
 

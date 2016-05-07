@@ -31,11 +31,17 @@ module DataAnon
         @destination_database = connection_spec
       end
 
+      def source_and_destination_db connection_spec
+        @source_database = @destination_database = connection_spec
+      end
+
       def default_field_strategies default_strategies
         @user_defaults = default_strategies
       end
 
       def table (name, &block)
+        @source_database or raise 'source database cannot be nil'
+        @destination_database or raise 'source database cannot be nil'
         table = @strategy.new(@source_database, @destination_database, name, @user_defaults).process_fields(&block)
         @tables << table
       end
