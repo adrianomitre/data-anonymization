@@ -16,7 +16,7 @@ module DataAnon
         @fields.each do |field_name, strategy|
           field_value = dest_record.attributes[field_name]
           unless field_value.nil? || is_primary_key?(field_name)
-            field = DataAnon::Core::Field.new(field_name, field_value, index, source_record, @name)
+            field = DataAnon::Core::Field.new(field_name, field_value, index, dest_record, @name, @destination_database)
             dest_record[field_name] = strategy.anonymize(field)
           end
         end

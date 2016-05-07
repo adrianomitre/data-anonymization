@@ -6,18 +6,15 @@ module DataAnon
         true
       end
 
-      def process_record(index, record)
+      def process_record(index, source_record)
         dest_record_map = {}
-        record.attributes.each do |field_name, field_value|
+        dest_record = dest_table.new source_record.attributes, without_protection: true
+        dest_record.attributes.each do |field_name, field_value|
           unless field_value.nil? || is_primary_key?(field_name)
-            field = DataAnon::Core::Field.new(field_name, field_value, index, record, @name)
+            field = DataAnon::Core::Field.new(field_name, field_value, index, dest_record, @name)
             field_strategy = @fields[field_name] || default_strategy(field_name)
             dest_record_map[field_name] = field_strategy.anonymize(field)
           end
-        end
-        dest_record = dest_table.new dest_record_map, without_protection: true
-        @primary_keys.each do |key|
-          dest_record[key] = record[key]
         end
         dest_record.save!
       end
