@@ -156,6 +156,11 @@ module DataAnon
         @progress_bar = progress_bar
       end
 
+      private
+
+      def persist!(record)
+        dest_record.save!
+      end
 
     end
   end

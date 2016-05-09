@@ -1,6 +1,7 @@
 require 'strategy/base'
 require 'strategy/whitelist'
 require 'strategy/blacklist'
+require 'strategy/persist_thru_update'
 require 'strategy/field/fields'
 
 begin
