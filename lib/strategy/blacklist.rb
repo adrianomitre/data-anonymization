@@ -20,7 +20,7 @@ module DataAnon
             dest_record[field_name] = strategy.anonymize(field)
           end
         end
-        dest_record.save!
+        persist!(dest_record)
       end
 
     end

@@ -16,7 +16,7 @@ module DataAnon
             dest_record_map[field_name] = field_strategy.anonymize(field)
           end
         end
-        dest_record.save!
+        persist!(dest_record)
       end
 
 
